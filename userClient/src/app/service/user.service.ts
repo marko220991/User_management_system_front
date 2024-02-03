@@ -9,16 +9,18 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   private userUrl: string;
+  private urlAdd: string;
 
   constructor(private http: HttpClient) {
-      this.userUrl = 'http://localhost:8080/users';
+      this.userUrl = 'http://localhost:8080/api/users';
+      this.urlAdd = 'http://localhost:8080/api/users/add';
   }
 
   public findAll(): Observable<User[]> {
     return this.http.get<User[]>(this.userUrl);
   }
 
-  public saveUser(user: User): any {
-    this.http.post<User[]>(this.userUrl, user);
+  public save(user: User) {
+    return this.http.post<User>(this.urlAdd, user);
   }
 }
